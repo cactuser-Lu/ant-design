@@ -1,4 +1,3 @@
-import os from 'node:os';
 import path from 'path';
 import { defineConfig } from 'dumi';
 import * as fs from 'fs-extra';
@@ -20,15 +19,12 @@ export default defineConfig({
     // to avoid generate routes for .dumi/pages/index/components/xx
     exclude: [/index\/components\//],
   },
-  ssr:
-    process.env.NODE_ENV === 'production'
-      ? {
-          builder: 'mako',
-        }
-      : false,
+  ssr: {
+    builder: 'mako',
+  },
   hash: true,
   mfsu: false,
-  mako: ['Darwin', 'Linux'].includes(os.type()) ? {} : false,
+  mako: {},
   crossorigin: {},
   runtimePublicPath: {},
   outputPath: '_site',

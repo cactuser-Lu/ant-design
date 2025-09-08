@@ -11,6 +11,12 @@ import { dependencies, devDependencies } from '../../package.json';
 function extractEmotionStyle(html: string) {
   // copy from emotion ssr
   // https://github.com/vercel/next.js/blob/deprecated-main/examples/with-emotion-vanilla/pages/_document.js
+
+  // Check if the SSR cache manager is available
+  if (!global.__ANTD_STYLE_CACHE_MANAGER_FOR_SSR__) {
+    return [];
+  }
+
   const styles = global.__ANTD_STYLE_CACHE_MANAGER_FOR_SSR__.getCacheList().map((cache) => {
     const result = createEmotionServer(cache).extractCritical(html);
     if (!result.css) {
